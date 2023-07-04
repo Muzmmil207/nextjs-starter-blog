@@ -10,14 +10,13 @@ const MAX_DISPLAY = 5
 
 export async function getServerSideProps() {
   // const posts = await getAllFilesFrontMatter('blog')
-  const res = await fetch('https://muzmmil207.pythonanywhere.com/posts')
+  const res = await fetch('https://muzamil-ali.onrender.com/posts')
   const posts = await res.json()
 
   return { props: { posts } }
 }
 
 export default function Home({ posts }) {
-
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />

@@ -30,7 +30,9 @@ export async function getServerSideProps({ params }) {
   //   const filteredPosts = allPosts.filter(
   //     (post) => post.draft !== true && post.tags.map((t) => kebabCase(t)).includes(params.tag)
   //     )
-  const res = await fetch(`https://muzmmil207.pythonanywhere.com/posts?tag=${kebabCase(params.tag)}`)
+  const res = await fetch(
+    `https://muzamil-ali.onrender.com/posts?tag=${kebabCase(params.tag)}`
+  )
   const filteredPosts = await res.json()
 
   // rss

@@ -8,7 +8,7 @@ const DEFAULT_LAYOUT = 'PostLayout'
 
 export async function getServerSideProps({ params }) {
   // const allPosts = await getAllFilesFrontMatter('blog')
-  const res = await fetch(`https://muzmmil207.pythonanywhere.com/posts/${params.slug.join('/')}`)
+  const res = await fetch(`https://muzamil-ali.onrender.com/posts/${params.slug.join('/')}`)
   const post = await res.json()
 
   // const postIndex = allPosts.findIndex((post) => formatSlug(post.slug) === params.slug.join('/'))
@@ -46,7 +46,7 @@ export default function Blog({ post, authorDetails, prev, next }) {
         //   prev={prev}
         //   next={next}
         // />
-        <div style={{ textAlign: "justify" }} dangerouslySetInnerHTML={{ __html: mdxSource }}></div>
+        <div style={{ textAlign: 'justify' }} dangerouslySetInnerHTML={{ __html: mdxSource }}></div>
       ) : (
         <div className="mt-24 text-center">
           <PageTitle>
@@ -60,5 +60,3 @@ export default function Blog({ post, authorDetails, prev, next }) {
     </>
   )
 }
-
-

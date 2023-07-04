@@ -4,12 +4,10 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import kebabCase from '@/lib/utils/kebabCase'
 
-
 export async function getServerSideProps() {
   // const posts = await getAllFilesFrontMatter('blog')
-  const res = await fetch('https://muzmmil207.pythonanywhere.com/tags')
+  const res = await fetch('https://muzamil-ali.onrender.com/tags')
   const tags = await res.json()
-  
   return { props: { tags } }
 }
 
