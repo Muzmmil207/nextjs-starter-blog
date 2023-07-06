@@ -5,9 +5,10 @@ const siteMetadata = {
   description: 'This is my personal blog',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://github.com/Muzmmil207/tailwind-nextjs-starter-blog.git',
+  siteUrl: 'https://muzamil-blog.netlify.app',
   siteRepo: 'https://github.com/Muzmmil207/tailwind-nextjs-starter-blog',
   siteLogo: '/static/images/logo.png',
+  APIUrl: 'https://muzamil-ali.onrender.com', // Your backend url
   image: '/static/images/avatar.png',
   socialBanner: '/static/images/twitter-card.png',
   email: 'mly88207@gmail.com',

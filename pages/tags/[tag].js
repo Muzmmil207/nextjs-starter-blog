@@ -10,27 +10,8 @@ import path from 'path'
 
 const root = process.cwd()
 
-// export async function getStaticPaths() {
-//   const tags = await getAllTags('blog')
-
-//   return {
-//     paths: Object.keys(tags).map((tag) => ({
-//       params: {
-//         tag,
-//       },
-//     })),
-//     fallback: false,
-//   }
-// }
-
 export async function getServerSideProps({ params }) {
-  // const allPosts = await getAllFilesFrontMatter('blog')
-  // export async function getServerSideProps() {
-  //   // const posts = await getAllFilesFrontMatter('blog')
-  //   const filteredPosts = allPosts.filter(
-  //     (post) => post.draft !== true && post.tags.map((t) => kebabCase(t)).includes(params.tag)
-  //     )
-  const res = await fetch(`https://muzamil-ali.onrender.com/posts?tag=${kebabCase(params.tag)}`)
+  const res = await fetch(siteMetadata.APIUrl + `/posts?tag=${kebabCase(params.tag)}`)
   const filteredPosts = await res.json()
 
   // rss

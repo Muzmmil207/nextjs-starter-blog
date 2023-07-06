@@ -9,8 +9,7 @@ import NewsletterForm from '@/components/NewsletterForm'
 const MAX_DISPLAY = 5
 
 export async function getServerSideProps() {
-  // const posts = await getAllFilesFrontMatter('blog')
-  const res = await fetch('https://muzamil-ali.onrender.com/posts')
+  const res = await fetch(siteMetadata.APIUrl + '/posts')
   const posts = await res.json()
 
   return { props: { posts } }

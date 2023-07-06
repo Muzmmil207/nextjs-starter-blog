@@ -5,8 +5,7 @@ import siteMetadata from '@/data/siteMetadata'
 import kebabCase from '@/lib/utils/kebabCase'
 
 export async function getServerSideProps() {
-  // const posts = await getAllFilesFrontMatter('blog')
-  const res = await fetch('https://muzamil-ali.onrender.com/tags')
+  const res = await fetch(siteMetadata.APIUrl + '/tags')
   const tags = await res.json()
   return { props: { tags } }
 }

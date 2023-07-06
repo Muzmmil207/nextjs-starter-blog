@@ -5,8 +5,7 @@ import { PageSEO } from '@/components/SEO'
 export const POSTS_PER_PAGE = 5
 
 export async function getServerSideProps() {
-  // const posts = await getAllFilesFrontMatter('blog')
-  const res = await fetch('https://muzamil-ali.onrender.com/posts')
+  const res = await fetch(siteMetadata.APIUrl + '/posts')
   const posts = await res.json()
   const initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE)
   const pagination = {

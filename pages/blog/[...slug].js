@@ -1,19 +1,21 @@
-// import fs from 'fs'
+import fs from 'fs'
 import PageTitle from '@/components/PageTitle'
-// import generateRss from '@/lib/generate-rss'
-// import { formatSlug, getAllFilesFrontMatter, getFileBySlug, getFiles } from '@/lib/mdx'
-import { getFileBySlug } from '@/lib/mdx'
+import generateRss from '@/lib/generate-rss'
+import { formatSlug, getFileBySlug } from '@/lib/mdx'
+import { HTMLLayoutRenderer } from '@/components/MDXComponents'
+import siteMetadata from '@/data/siteMetadata'
 
 const DEFAULT_LAYOUT = 'PostLayout'
 
 export async function getServerSideProps({ params }) {
-  // const allPosts = await getAllFilesFrontMatter('blog')
-  const res = await fetch(`https://muzamil-ali.onrender.com/posts/${params.slug.join('/')}`)
-  const post = await res.json()
+  // const res = await fetch(`http://127.0.0.1:8000/posts/${params.slug.join('/')}`)
+  const res = await fetch(siteMetadata.APIUrl + '/posts')
+  const allPosts = await res.json()
 
-  // const postIndex = allPosts.findIndex((post) => formatSlug(post.slug) === params.slug.join('/'))
-  const prev = null // allPosts[postIndex + 1] ||
-  const next = null // allPosts[postIndex - 1] ||
+  const postIndex = allPosts.findIndex((post) => formatSlug(post.slug) === params.slug.join('/'))
+  const post = allPosts[postIndex]
+  const prev = allPosts[postIndex + 1] || null
+  const next = allPosts[postIndex - 1] || null
   const authorList = ['default']
   const authorPromise = authorList.map(async (author) => {
     const authorResults = await getFileBySlug('authors', [author])
@@ -22,10 +24,10 @@ export async function getServerSideProps({ params }) {
   const authorDetails = await Promise.all(authorPromise)
 
   // rss
-  // if (allPosts.length > 0) {
-  //   const rss = generateRss(allPosts)
-  //   fs.writeFileSync('./public/feed.xml', rss)
-  // }
+  if (allPosts.length > 0) {
+    const rss = generateRss(allPosts)
+    fs.writeFileSync('./public/feed.xml', rss)
+  }
   return { props: { post, authorDetails, prev, next } }
 }
 
@@ -37,16 +39,15 @@ export default function Blog({ post, authorDetails, prev, next }) {
   return (
     <>
       {frontMatter.draft !== true ? (
-        // <MDXLayoutRenderer
-        //   layout={frontMatter.layout || DEFAULT_LAYOUT}
-        //   toc={toc}
-        //   mdxSource={mdxSource}
-        //   frontMatter={frontMatter}
-        //   authorDetails={authorDetails}
-        //   prev={prev}
-        //   next={next}
-        // />
-        <div style={{ textAlign: 'justify' }} dangerouslySetInnerHTML={{ __html: mdxSource }}></div>
+        <HTMLLayoutRenderer
+          layout={DEFAULT_LAYOUT}
+          toc={toc}
+          mdxSource={mdxSource}
+          frontMatter={frontMatter}
+          authorDetails={authorDetails}
+          prev={prev}
+          next={next}
+        />
       ) : (
         <div className="mt-24 text-center">
           <PageTitle>
