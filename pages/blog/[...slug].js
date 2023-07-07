@@ -1,6 +1,6 @@
-import fs from 'fs'
+// import fs from 'fs'
 import PageTitle from '@/components/PageTitle'
-import generateRss from '@/lib/generate-rss'
+// import generateRss from '@/lib/generate-rss'
 import { formatSlug, getFileBySlug } from '@/lib/mdx'
 import { HTMLLayoutRenderer } from '@/components/MDXComponents'
 import siteMetadata from '@/data/siteMetadata'
@@ -24,10 +24,10 @@ export async function getServerSideProps({ params }) {
   const authorDetails = await Promise.all(authorPromise)
 
   // rss
-  if (allPosts.length > 0) {
-    const rss = generateRss(allPosts)
-    fs.writeFileSync('./public/feed.xml', rss)
-  }
+  // if (allPosts.length > 0) {
+  //   const rss = generateRss(allPosts)
+  //   fs.writeFileSync('./public/feed.xml', rss)
+  // }
   return { props: { post, authorDetails, prev, next } }
 }
 
